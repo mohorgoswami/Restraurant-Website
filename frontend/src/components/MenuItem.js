@@ -1,15 +1,26 @@
 import React from "react";
 import "./MenuItem.css";
 
-const MenuItem = ({ item, onAddToCart }) => {
+const MenuItem = ({ item, onAdd, onRemove }) => {
   return (
     <div className="menu-item">
-      <img src={item.image} alt={item.name} className="menu-item-image" />
-      <h3>{item.name}</h3>
-      <p>{item.description}</p>
+      {item.image && (
+        <img src={item.image} alt={item.name} className="menu-item-image" />
+      )}
+      <div className="menu-item-body">
+        <h3>{item.name}</h3>
+        <p>{item.description}</p>
+      </div>
       <div className="menu-item-footer">
         <span className="price">${item.price.toFixed(2)}</span>
-        <button onClick={onAddToCart}>Add to Cart</button>
+        <div className="qty-controls">
+          <button className="remove-small" onClick={onRemove} aria-label={`Remove ${item.name}`}>
+            -
+          </button>
+          <button className="add-small" onClick={onAdd} aria-label={`Add ${item.name}`}>
+            +
+          </button>
+        </div>
       </div>
     </div>
   );
